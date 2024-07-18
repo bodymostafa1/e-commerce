@@ -6,7 +6,7 @@ let brandSchema = new mongoose.Schema({
         required:true,
         unique:[true,"name is required"],
         trim:true,
-        minLength:[2,"too short category name"]
+        minLength:[2,"too short brand name"]
     },
     slug:{
         type:String, 
@@ -17,5 +17,8 @@ let brandSchema = new mongoose.Schema({
 },{
     timestamps:true,
     versionKey:false
+})
+brandSchema.post("init",function(doc){
+    doc.logo= "http://localhost:3000/uploads/brands/" + doc.logo
 })
 export const Brand = mongoose.model("Brand",brandSchema)

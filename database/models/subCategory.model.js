@@ -6,7 +6,7 @@ let schema = new mongoose.Schema({
         required:true,
         unique:[true,"name is required"],
         trim:true,
-        minLength:[2,"too short category name"]
+        minLength:[2,"too short subcategory name"]
     },
     slug:{
         type:String, 

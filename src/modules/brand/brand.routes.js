@@ -1,10 +1,11 @@
 import { Router } from "express";
 import { addBrand, allBrands, deleteBrand, getBrand, updateBrand } from "./brand.controller.js";
+import { uploadSingleFile } from "../../fileUpload/fileUpload.js";
 let brandRouter = Router()
 brandRouter.route("/")
-.post(addBrand).get(allBrands)
+.post(uploadSingleFile('logo',"brands"),addBrand).get(allBrands)
 brandRouter.route("/:id")
 .get(getBrand)
-.put(updateBrand)
+.put(uploadSingleFile('logo',"brands"),updateBrand)
 .delete(deleteBrand)
 export default brandRouter
