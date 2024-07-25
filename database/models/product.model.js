@@ -52,7 +52,16 @@ let Schema = new mongoose.Schema({
     stock:Number
 },{
     timestamps:true,
-    versionKey:false
+    versionKey:false,
+    toJSON:{virtuals:true}
+})
+Schema.virtual('Reviews',{
+ref:'Review',
+localField:'_id',
+foreignField:'product'
+})
+Schema.pre('findOne',function(){
+    this.populate('Reviews')
 })
 Schema.post('init',function (doc){
     doc.imageCover = "http://localhost:3000/uploads/products/" + doc.imageCover
