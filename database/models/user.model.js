@@ -13,7 +13,13 @@ let schema = new mongoose.Schema({
         enum:['Admin','User'],
         default:'User'
     },
-    passwordChangedAt:Date
+    passwordChangedAt:Date,
+    wishlist:[{type:Types.ObjectId,ref:"Product"}],
+    address:[{
+        phone:String,
+        street:String,
+        city:String
+    }]
 })
 schema.pre('save',function (){
     this.password = bcrypt.hashSync(this.password,8)
