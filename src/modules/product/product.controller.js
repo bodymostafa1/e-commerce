@@ -7,10 +7,12 @@ import { getAll } from "../../utils/getAll.js"
 import { getOne } from "../../utils/getOne.js"
 let addProduct = catchError(async (req,res,next)=>{
     req.body.slug = slugify(req.body.title)
-    req.body.imageCover = req.files.imageCover[0].filename
-    req.body.images = req.files.images.map((img)=>{
-        return img.filename
-    })
+    if (req.body.imageCover) req.body.imageCover = req.files.imageCover[0].filename
+     if (req.body.images) {
+        req.body.images = req.files.images.map((img)=>{
+            return img.filename
+        })
+     }
     let product = new Product(req.body)
     await product.save()
     res.json({message:"Product added successfully",newProduct:product})

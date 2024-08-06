@@ -4,7 +4,7 @@ let Schema = new mongoose.Schema({
     title:{
         type:String, 
         required:true,
-        unique:[true,"name is required"],
+        unique:[true,"title is required"],
         trim:true,
         minLength:[2,"too short product name"]
     },
